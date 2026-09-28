@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="TQQQ 200일선 전략을 확정 종가 기준으로 설명하고 신호를 계산하는 가이드 앱"
+    />
+    <title>200 Signal — TQQQ 전략 가이드</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="grain" aria-hidden="true"></div>
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="200 Signal 홈">
+        <span class="brand-mark">200</span>
+        <span class="brand-name">SIGNAL</span>
+      </a>
+      <nav aria-label="주요 메뉴">
+        <a href="#signal">오늘의 신호</a>
+        <a href="#account">내 계좌</a>
+        <a href="#guide">전략 가이드</a>
+      </nav>
+      <button class="icon-button" id="refreshButton" type="button" aria-label="데이터 새로고침">
+        <span>↻</span>
+      </button>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">TQQQ · SMA 200 · DAILY CLOSE</p>
+          <h1>예측하지 않고,<br /><em>확정된 신호</em>를 <span class="mobile-line">봅니다.</span></h1>
+          <p class="hero-description">
+            미국 정규장 종가로 하루 한 번만 판단합니다. 장중 소음 대신 매수·보유·대피 규칙과 그 근거를 한 화면에 정리했습니다.
+          </p>
+          <div class="hero-actions">
+            <a class="primary-button" href="#signal">오늘의 신호 보기 <span>↓</span></a>
+            <button class="text-button" id="demoButton" type="button">데모 데이터로 체험</button>
+          </div>
+        </div>
+        <aside class="hero-rule" aria-label="핵심 원칙">
+          <p class="rule-number">01</p>
+          <div>
+            <p class="rule-label">단 하나의 기준</p>
+            <p class="rule-main">TQQQ 종가<br /><span>vs.</span> SMA 200</p>
+          </div>
+          <p class="rule-footnote">장중·프리마켓 제외<br />미국 정규장 종가 확정 후 판정</p>
+        </aside>
+      </section>
+
+      <section class="signal-section section-shell" id="signal">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow dark">MARKET REGIME</p>
+            <h2>오늘의 신호</h2>
+          </div>
+          <div class="data-status" id="dataStatus">
+            <span class="status-dot"></span>
+            <span>데이터 불러오는 중</span>
+          </div>
+        </div>
+
+        <div class="signal-grid">
+          <article class="signal-card loading-card" id="signalCard">
+            <div class="signal-card-top">
+              <span class="signal-date" id="signalDate">—</span>
+              <span class="signal-badge" id="signalBadge">계산 중</span>
+            </div>
+            <div class="signal-main">
+              <div>
+                <p class="signal-kicker">CURRENT ACTION</p>
+                <h3 id="signalLabel">데이터 확인 중</h3>
+              </div>
+              <span class="signal-arrow" id="signalArrow">→</span>
+            </div>
+            <p class="signal-action" id="signalAction">시장 데이터를 불러와 신호를 계산하고 있습니다.</p>
+            <p class="signal-reason" id="signalReason"></p>
+          </article>
+
+          <article class="metrics-card">
+            <div class="metric">
+              <span>TQQQ 종가</span>
+              <strong id="closePrice">—</strong>
+              <small>확정 종가</small>
+            </div>
+            <div class="metric">
+              <span>SMA 200</span>
+              <strong id="smaPrice">—</strong>
+              <small>200거래일 단순평균</small>
+            </div>
+            <div class="metric accent-metric">
+              <span>이격률</span>
+              <strong id="distanceValue">—</strong>
+              <small id="distanceLabel">종가와 기준선의 거리</small>
+            </div>
+          </article>
+        </div>
+
+        <article class="chart-card">
+          <div class="chart-heading">
+            <div>
+              <p>TQQQ / SMA 200</p>
+              <span>최근 1년 · 일별 종가</span>
+            </div>
+            <div class="chart-legend">
+              <span><i class="legend-price"></i>TQQQ</span>
+              <span><i class="legend-sma"></i>SMA 200</span>
+            </div>
+          </div>
+          <div class="chart-wrap">
+            <svg id="priceChart" viewBox="0 0 1000 330" role="img" aria-label="TQQQ 종가와 200일 이동평균선 차트">
+              <text x="500" y="165" text-anchor="middle" class="chart-placeholder">차트 데이터 준비 중</text>
+            </svg>
+          </div>
+        </article>
+
+        <div class="source-strip">
+          <p><span>DATA</span> <strong id="sourceName">연결 중</strong></p>
+          <p><span>UPDATED</span> <strong id="updatedAt">—</strong></p>
+          <p class="source-warning">데이터 제공 지연·오류가 있을 수 있습니다. 실제 주문 전 증권사 종가를 확인하세요.</p>
+        </div>
+      </section>
+
+      <section class="account-section" id="account">
+        <div class="section-shell account-shell">
+          <div class="section-heading light">
+            <div>
+              <p class="eyebrow">MY POSITION</p>
+              <h2>내 계좌 행동 계산기</h2>
+            </div>
+            <p class="section-intro">평균단가와 환율을 입력하면 환차손익을 포함한 다음 행동을 계산합니다. 입력값은 이 브라우저에만 저장됩니다.</p>
+          </div>
+
+          <div class="account-grid">
+            <form class="account-form" id="accountForm">
+              <label>
+                <span>보유 수량</span>
+                <div class="input-wrap">
+                  <input id="quantityInput" type="number" min="0" step="0.000001" placeholder="100" />
+                  <b>주</b>
+                </div>
+              </label>
+              <label>
+                <span>평균단가</span>
+                <div class="input-wrap">
+                  <input id="averagePriceInput" type="number" min="0" step="0.01" placeholder="55.00" />
+                  <b>USD</b>
+                </div>
+              </label>
+              <label>
+                <span>평균 매수환율</span>
+                <div class="input-wrap">
+                  <input id="buyFxInput" type="number" min="0" step="0.01" placeholder="1,350" />
+                  <b>KRW</b>
+                </div>
+              </label>
+              <label class="check-label">
+                <input id="fractionalInput" type="checkbox" />
+                <span>소수점 거래 지원</span>
+              </label>
+
+              <fieldset>
+                <legend>이미 완료한 익절 단계</legend>
+                <div class="milestone-checks" id="milestoneChecks"></div>
+              </fieldset>
+
+              <button class="calculate-button" type="submit">행동 다시 계산</button>
+            </form>
+
+            <article class="account-result">
+              <div class="result-top">
+                <p>환율 반영 평가수익률</p>
+                <strong id="profitRate">입력 대기</strong>
+                <span id="profitExplanation">보유 정보를 입력해 주세요.</span>
+              </div>
+              <div class="result-rule"></div>
+              <div class="result-action">
+                <p>NEXT ACTION</p>
+                <h3 id="accountAction">시장 신호를 먼저 확인합니다.</h3>
+                <div id="orderPlan" class="order-plan"></div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="guide-section section-shell" id="guide">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow dark">THE PLAYBOOK</p>
+            <h2>전략을 한 장으로</h2>
+          </div>
+          <p class="section-intro dark-copy">원문 전략과 구현 해석을 분리했습니다. 아래 순서가 앱이 따르는 기본 상태 전환입니다.</p>
+        </div>
+
+        <div class="playbook">
+          <article class="play-card">
+            <span class="play-index">01</span>
+            <p class="play-state">BELOW SMA 200</p>
+            <h3>SGOV에서 대기</h3>
+            <p>신규 자금도 SGOV에 두고 다음 확정 상향 돌파를 기다립니다.</p>
+          </article>
+          <article class="play-card highlighted">
+            <span class="play-index">02</span>
+            <p class="play-state">CROSS ABOVE</p>
+            <h3>3거래일 분할매수</h3>
+            <p>1/3 → 남은 현금의 1/2 → 잔여 현금 전액. 도중 이탈하면 즉시 종료합니다.</p>
+          </article>
+          <article class="play-card">
+            <span class="play-index">03</span>
+            <p class="play-state">ABOVE SMA 200</p>
+            <h3>보유하며 단계 익절</h3>
+            <p>+10·25·50%는 10%씩, +100%부터는 남은 수량의 50%를 SPYM으로 옮깁니다.</p>
+          </article>
+          <article class="play-card exit-card">
+            <span class="play-index">04</span>
+            <p class="play-state">CROSS BELOW</p>
+            <h3>전량 대피</h3>
+            <p>TQQQ와 SPYM을 정리하고 SGOV로 전환합니다. 별도의 손절률은 없습니다.</p>
+          </article>
+        </div>
+
+        <div class="risk-note">
+          <p class="eyebrow dark">BEFORE YOU FOLLOW</p>
+          <h3>높은 수익률보다 먼저<br />큰 낙폭을 이해해야 합니다.</h3>
+          <div>
+            <p>원문이 제시한 장기 MDD는 약 <strong>−60%</strong>이며 아직 독립 검증되지 않았습니다.</p>
+            <p>과거 백테스트는 미래 수익을 보장하지 않습니다. 이 앱은 투자 자문이나 자동주문 서비스가 아닙니다.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="brand footer-brand">
+        <span class="brand-mark">200</span>
+        <span class="brand-name">SIGNAL</span>
+      </div>
+      <p>규칙을 기록하고, 근거를 확인하고, 최종 판단은 직접 합니다.</p>
+      <span>Prototype · v0.1</span>
+    </footer>
+
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>

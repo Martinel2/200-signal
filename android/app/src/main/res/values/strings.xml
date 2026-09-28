@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">200 SIGNAL</string>
+    <string name="widget_title">200 SIGNAL · CURRENT ACTION</string>
+    <string name="widget_description">SMA200 신호와 내 계좌의 오늘 주문수량</string>
+    <string name="widget_refresh">↻</string>
+    <string name="widget_loading">신호 불러오는 중</string>
+    <string name="widget_chart_description">최근 TQQQ 종가와 SMA200 미니 차트</string>
+</resources>

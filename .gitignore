@@ -1,0 +1,16 @@
+# Bundled JDK used only for local Android builds
+.tools/
+
+# Build output
+android/build/
+android/app/build/
+android/.gradle/
+android/.idea/
+android/local.properties
+node_modules/
+
+# Debug APKs are attached to GitHub releases instead of tracked here
+*.apk
+*.apk.zip
+
+.DS_Store
