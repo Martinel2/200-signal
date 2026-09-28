@@ -10,7 +10,7 @@ FMKorea의 '아기티큐 TQQQ 200일선 매매법'을 가이드북과 매매 신
 - [가이드북 초안](docs/guidebook.md)
 - [앱용 전략 명세](docs/strategy-spec.md)
 - [200큐큐단(베타) 감시 명세](docs/beta-strategy-spec.md)
-- [백테스트 검증 메모](docs/backtest-audit.md)
+- [백테스트 검증 메모](docs/backtest-audit.md) — 원문 성과의 재현 여부와 승률 통계의 세는 단위 확인
 - [미확정 사항과 충돌](docs/open-questions.md)
 
 ## 중요한 원칙
