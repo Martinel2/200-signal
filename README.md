@@ -23,7 +23,7 @@ FMKorea의 '아기티큐 TQQQ 200일선 매매법'을 가이드북과 매매 신
 
 설치 가능한 APK:
 
-- [200 SIGNAL v0.38 디버그 APK](200-signal-v0.38-debug.apk)
+- [200 SIGNAL v0.38 디버그 APK](https://github.com/Martinel2/200-signal/releases/tag/v0.38)
 
 지원 범위:
 
